@@ -119,7 +119,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BinaryFileHandler.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="TestApp.cs" />
+    <Compile Include="VehicleBinaryFileWriter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
