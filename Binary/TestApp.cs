@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Binary
 {
     public class TestApp
     {
-        private BinaryFileHandler<Vehicle> handler;
+        private readonly BinaryFileHandler<Vehicle> Handler;
         
         public TestApp()
         {
-            handler = new VehicleBinaryFileWriter();
+            Handler = new VehicleBinaryFileHandler();
         }
 
         public async Task RunTestAsync()
@@ -22,12 +18,12 @@ namespace Binary
             Car car2 = new Car("Nissan", "Skyline", 2005, 500, 2.5);
             Car car3 = new Car("Toyota", "Carolla", 2008, 700, 1.8);
 
-            handler.AddObjectToWrite(car1);
-            handler.AddObjectToWrite(car2);
-            handler.AddObjectToWrite(car3);
-            await handler.WriteValuesAsync();
+            Handler.AddObjectToWrite(car1);
+            Handler.AddObjectToWrite(car2);
+            Handler.AddObjectToWrite(car3);
+            await Handler.WriteValuesAsync();
 
-            handler.ReadDataFile();
+            Handler.ReadDataFile();
         }
     }
 }

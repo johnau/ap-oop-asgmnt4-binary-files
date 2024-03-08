@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.PortableExecutable;
 using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
 
 namespace Binary
 {
-    internal class VehicleBinaryFileWriter : BinaryFileHandler<Vehicle>
+    internal class VehicleBinaryFileHandler : BinaryFileHandler<Vehicle>
     {
         private readonly Vehicle _terminatorObject;
         
-        public VehicleBinaryFileWriter()
+        public VehicleBinaryFileHandler()
             : base()
         {
             _terminatorObject = new Vehicle()
@@ -53,11 +48,9 @@ namespace Binary
                 throw new Exception($"An expected file was not found: {filePath}");
             
             using (var stream = File.Open(filePath, FileMode.Open))
+            using (var reader = new BinaryReader(stream, Encoding.UTF8, false))
             {
-                using (var reader = new BinaryReader(stream, Encoding.UTF8, false))
-                {
-                    ReadData(reader);
-                }
+                ReadData(reader);
             }
 
             return items;

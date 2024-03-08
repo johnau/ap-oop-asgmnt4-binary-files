@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Automation.Peers;
+using Windows.Storage;
 
 namespace Binary
 {
     public abstract class BinaryFileHandler<T>
     {
-        protected const string filePath = "U:\\data.dat";
+        protected const string filename = "data.bin";
+        protected string filePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, filename);
 
         protected List<T> items;
 
@@ -41,6 +40,7 @@ namespace Binary
 
         public void WriteValues()
         {
+            Debug.WriteLine($"Filepath is: {filePath}");
             using (var stream = File.Open(filePath, FileMode.OpenOrCreate))
             using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
             {
